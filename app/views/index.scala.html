@@ -1,0 +1,31 @@
+@(users: List[User], userForm: Form[User])
+
+@import helper._
+
+@main("Welcome to kumanomi") {
+	<!--a href="http://www.facebook.com/dialog/oauth?client_id=456107231173835&redirect_uri=http%3A%2F%2Flocalhost%3A9000%2F">face book</a -->
+
+	<div>users</div>
+	<table>
+	@for(user <- users) {
+		<tr>
+	    	<td>@user.oauthType</td>
+	    	<td>@user.openId</td>
+	    	<td>@user.openId</td>
+	    	<td>
+	    	@form(routes.Application.delete(user.id)) {
+	    		<input type="submit" value="Delete">
+	    	}
+	    	</td>
+		</tr>
+	}
+	</table>
+	
+	@form(routes.Application.login()) {
+		@inputText(userForm("oauthType")) 
+		@inputText(userForm("openId")) 
+		<input type="submit" value="Create">
+	}
+	
+	<a href="@routes.DrinkController.drinks()">drinks</a>
+}

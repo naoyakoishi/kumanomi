@@ -1,0 +1,14 @@
+run
+play eclipse
+dir
+exit
+run
+h2-browser
+run
+h2-browser
+run
+play
+run
+h2-blowser
+h2-browser
+run

@@ -1,0 +1,59 @@
+/* play */
+dd.info {
+	display: none;
+}
+
+/* jquery datepicker */
+.ui-datepicker {
+    font-size: 70% !important;
+}
+
+/* common */
+body {
+	font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック';  
+}
+
+form {
+	padding: 0px;
+	margin: 0px;
+}
+
+.hide {
+	display: none;
+}
+
+div.contentBody {
+	padding: 5px;
+	background-color: #E0FFFF;
+	margin-bottom: 10px;
+	border-radius: 10px;
+}
+div.contentTitle {
+	width: 80%;
+	margin-top: 10px;
+	margin-left: 10px;
+	border-bottom: dotted 2px #696969;
+}
+div.content {
+	margin-top: 10px;
+	margin-left: 20px;
+	font-size: small;
+}
+dl.clm dt {
+	float: left;
+}
+
+/* drink input */
+div#shop, div#shop > dl, div#shop > dl > dt, div#shop > dl > dd  {
+	margin-top: 0px;
+	padding-top: 0px;
+}
+div#shop > dl > dd > div.shop {
+	margin-top: 10px;
+}
+div#shop > dl > dd > div.shop > dl.clm {
+	margin: 0px;
+}
+div#shop > dl > dd > div.shop > dl.clm > dt {
+	width: 80px;
+}

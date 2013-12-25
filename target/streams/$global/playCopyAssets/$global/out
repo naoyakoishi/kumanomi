@@ -1,0 +1,6 @@
+[0m[[0mdebug[0m] [0mCopy play resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(C:\play\workspace\kumanomi\public\images\favicon.png,C:\play\workspace\kumanomi\target\scala-2.10\classes\public\images\favicon.png)[0m
+[0m[[0mdebug[0m] [0m	(C:\play\workspace\kumanomi\public\javascripts\jquery-1.10.2.min.js,C:\play\workspace\kumanomi\target\scala-2.10\classes\public\javascripts\jquery-1.10.2.min.js)[0m
+[0m[[0mdebug[0m] [0m	(C:\play\workspace\kumanomi\public\javascripts\jquery-ui-1.10.3.custom.min.js,C:\play\workspace\kumanomi\target\scala-2.10\classes\public\javascripts\jquery-ui-1.10.3.custom.min.js)[0m
+[0m[[0mdebug[0m] [0m	(C:\play\workspace\kumanomi\public\stylesheets\jquery-ui-1.10.3.custom.min.css,C:\play\workspace\kumanomi\target\scala-2.10\classes\public\stylesheets\jquery-ui-1.10.3.custom.min.css)[0m
+[0m[[0mdebug[0m] [0m	(C:\play\workspace\kumanomi\public\stylesheets\main.css,C:\play\workspace\kumanomi\target\scala-2.10\classes\public\stylesheets\main.css)[0m
