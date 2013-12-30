@@ -20,10 +20,10 @@ public class DrinkPlace extends Model {
 	
 	public String shopName;
 	
-	@Pattern(value = "^(http://|https://).*")
+	//@Pattern(value = "^(http://|https://).*")
 	public String shopUrl;
 	
-	@Required
+	//@Required
 	public String station;
 
 	@ManyToOne

@@ -48,12 +48,12 @@ div#shop, div#shop > dl, div#shop > dl > dt, div#shop > dl > dd  {
 	margin-top: 0px;
 	padding-top: 0px;
 }
-div#shop > dl > dd > div.shop {
+div#shop > dl > dd#shopList > div.shopInfo {
 	margin-top: 10px;
 }
-div#shop > dl > dd > div.shop > dl.clm {
+div#shop > dl > dd#shopList > div.shopInfo > dl.clm {
 	margin: 0px;
 }
-div#shop > dl > dd > div.shop > dl.clm > dt {
+div#shop > dl > dd#shopList > div.shopInfo > dl.clm > dt {
 	width: 80px;
 }

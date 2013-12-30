@@ -32,7 +32,7 @@ public class Drink extends Model {
 	
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="drink")
-	public List<DrinkTime> times;
+	public List<DrinkDate> dates;
 
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="drink")

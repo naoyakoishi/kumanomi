@@ -22,9 +22,9 @@
 
 	<div>time</div>
 	<table border="1">
-	@for(time <- drink.times) {
+	@for(date <- drink.dates) {
 		<tr>
-			<td>@time.date.format("yyyy/MM/dd")</td>
+			<td>@date.date.format("yyyy/MM/dd")</td>
 		</tr>
 	
 	}

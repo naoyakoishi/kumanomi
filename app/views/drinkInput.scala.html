@@ -11,14 +11,19 @@
         @textarea(drinkForm("description"), '_label -> "説明")
         
         <div id="date">
-          @inputText(drinkForm("times[0].date"), 
+          @inputText(drinkForm("dates[0].date"), 
           		'_label -> <span>候補日 <a href="" id="addDate">追加</a></span>)
         </div>
         
         <div id="shop">
 　　　　　　　　　<dl>
             <dt>店  <a href="" id="addShop">追加</a></dt>
-            <dd id="list">
+            <dd id="shopList">
+              <div class="shopInfo">
+                @inputText(drinkForm("places[0].shopName"), '_class -> "clm", '_label -> "店名")
+                @inputText(drinkForm("places[0].shopUrl"), '_class -> "clm", '_label -> "店URL")
+                @inputText(drinkForm("places[0].station"), '_class -> "clm", '_label -> "最寄り駅")
+              </div>
             </dd>
           </dl>
         </div>
@@ -45,7 +50,7 @@
 <script>
 
 var dateNum = 1;
-var shopNum = 0;
+var shopNum = 1;
 
 $(document).ready(function() {
 
@@ -78,29 +83,33 @@ $(document).ready(function() {
 		return $removeDate;
 	}
 	
-	$("#times_0__date").datepicker({
+	$("#dates_0__date").datepicker({
 	    showOn: "both",
 	    dateFormat: 'yy/mm/dd'
 	});
 
-	$("#times_0__date").parent("dd").append(createRemoveDateLink());
+	$("#dates_0__date").parent("dd").append(createRemoveDateLink());
 
 	// 候補日 end
 
 	//　店舗 start
 	$("#addShop").click(function() {
-		$("div#shop").find("dd#list").append(createShopInput());
+		$("div#shop").find("dd#shopList").append(createShopInput());
 		return false;
 	});
 	
 	function createShopInput() {
 		$tmpShop = $(".tmpShop").clone();
-		$tmpShop.attr("class", "shop");
+		$tmpShop.attr("class", "shopInfo");
+		$tmpShopName = $tmpShop.find("input#places_number__shopName");
+		$tmpShopName.attr("name", $tmpShopName.attr("name").replace("number", shopNum));
+		$tmpShopUrl = $tmpShop.find("input#places_number__shopUrl");
+		$tmpShopUrl.attr("name", $tmpShopUrl.attr("name").replace("number", shopNum));
+		$tmpStation = $tmpShop.find("input#places_number__station");
+		$tmpStation.attr("name", $tmpStation.attr("name").replace("number", shopNum));
+		shopNum++;
 		return $tmpShop;
 	}
-	
-	$("div#shop").find("dd#list").append(createShopInput());
-	
 	// 店舗　end
 });
 
@@ -109,7 +118,7 @@ $(document).ready(function() {
 
 <div class="hide">
   <div id="tmpDate">
-    @inputText(drinkForm("times[number].date"))
+    @inputText(drinkForm("dates[number].date"))
   </div>
   
   <div class="tmpShop">
