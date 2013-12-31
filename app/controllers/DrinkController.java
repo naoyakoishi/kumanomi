@@ -20,7 +20,7 @@ public class DrinkController extends Controller {
 	 */
 	public static Result drink(Long id) {
 		try {
-			Drink drink = Drink.find.ref(id);			
+			Drink drink = Drink.find.ref(id);
 			return ok(
 					views.html.drink.render(drink)
 					);
