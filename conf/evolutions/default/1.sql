@@ -28,13 +28,6 @@ create table drink_place (
   constraint pk_drink_place primary key (id))
 ;
 
-create table drink_time (
-  id                        bigint not null,
-  date                      timestamp,
-  drink_id                  bigint,
-  constraint pk_drink_time primary key (id))
-;
-
 create table drink_user (
   id                        bigint not null,
   user_id                   varchar(255),
@@ -56,8 +49,6 @@ create sequence drink_date_seq;
 
 create sequence drink_place_seq;
 
-create sequence drink_time_seq;
-
 create sequence drink_user_seq;
 
 create sequence user_seq;
@@ -66,10 +57,8 @@ alter table drink_date add constraint fk_drink_date_drink_1 foreign key (drink_i
 create index ix_drink_date_drink_1 on drink_date (drink_id);
 alter table drink_place add constraint fk_drink_place_drink_2 foreign key (drink_id) references drink (id) on delete restrict on update restrict;
 create index ix_drink_place_drink_2 on drink_place (drink_id);
-alter table drink_time add constraint fk_drink_time_drink_3 foreign key (drink_id) references drink (id) on delete restrict on update restrict;
-create index ix_drink_time_drink_3 on drink_time (drink_id);
-alter table drink_user add constraint fk_drink_user_drink_4 foreign key (drink_id) references drink (id) on delete restrict on update restrict;
-create index ix_drink_user_drink_4 on drink_user (drink_id);
+alter table drink_user add constraint fk_drink_user_drink_3 foreign key (drink_id) references drink (id) on delete restrict on update restrict;
+create index ix_drink_user_drink_3 on drink_user (drink_id);
 
 
 
@@ -83,8 +72,6 @@ drop table if exists drink_date;
 
 drop table if exists drink_place;
 
-drop table if exists drink_time;
-
 drop table if exists drink_user;
 
 drop table if exists user;
@@ -96,8 +83,6 @@ drop sequence if exists drink_seq;
 drop sequence if exists drink_date_seq;
 
 drop sequence if exists drink_place_seq;
-
-drop sequence if exists drink_time_seq;
 
 drop sequence if exists drink_user_seq;
 

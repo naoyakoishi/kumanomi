@@ -20,7 +20,7 @@ public class DrinkController extends Controller {
 	 */
 	public static Result drink(Long id) {
 		try {
-			Drink drink = Drink.find.ref(id);
+			Drink drink = Drink.find.ref(id);			
 			return ok(
 					views.html.drink.render(drink)
 					);
@@ -63,6 +63,10 @@ public class DrinkController extends Controller {
 					);
 		} else {
 			Drink drink = filledForm.get();
+			for (int i = 0; i < drink.dates.size(); i++) {
+				drink.dates.get(i).delete();
+			}
+					
 			String[] users = request().body().asFormUrlEncoded().get("tmpUser");
 			for (int i = 0; i < users.length; i++) {
 				DrinkUser user = new DrinkUser();

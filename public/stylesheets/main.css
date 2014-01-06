@@ -44,16 +44,17 @@ dl.clm dt {
 }
 
 /* drink input */
-div#shop, div#shop > dl, div#shop > dl > dt, div#shop > dl > dd  {
-	margin-top: 0px;
-	padding-top: 0px;
-}
-div#shop > dl > dd#shopList > div.shopInfo {
-	margin-top: 10px;
-}
-div#shop > dl > dd#shopList > div.shopInfo > dl.clm {
+dd#dateList {
 	margin: 0px;
 }
-div#shop > dl > dd#shopList > div.shopInfo > dl.clm > dt {
+dd#dateList > dl {
+	margin: 0px;
+}
+
+dd#shopList dl {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+div.shopInfo > dl > dt {
 	width: 80px;
 }
