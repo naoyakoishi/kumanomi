@@ -2,6 +2,7 @@ package controllers;
 
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.api.mvc.Session;
 import play.data.Form;
 import models.User;
 
@@ -13,6 +14,10 @@ public class Application extends Controller {
 		return ok(views.html.index.render(User.all(), userForm));
 	}
 	
+	/**
+	 * 仮
+	 * @return
+	 */
 	public static Result login() {
 		Form<User> filledForm = userForm.bindFromRequest();
 		if(filledForm.hasErrors()) {
@@ -21,9 +26,12 @@ public class Application extends Controller {
 					);
 		} else {
 			User user = new User();
+			user.userId = filledForm.get().userId;
 			user.oauthType = filledForm.get().oauthType;
 			user.openId= filledForm.get().openId;
-			
+
+			session("userId", user.userId);
+
 			User.create(filledForm.get());
 			return redirect(routes.Application.index());  
 		}

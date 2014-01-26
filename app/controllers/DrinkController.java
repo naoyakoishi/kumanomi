@@ -7,77 +7,70 @@ import java.util.List;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.data.Form;
+
 import models.Drink;
-import models.DrinkUser;
+import models.DrinkMember;
+
+import views.html.drink.*;
 
 public class DrinkController extends Controller {
 
 	static Form<Drink> drinkForm = Form.form(Drink.class);
-	
-	/**
-	 * 詳細画面を表示する。
-	 * @return 詳細画面
-	 */
-	public static Result drink(Long id) {
-		try {
-			Drink drink = Drink.find.ref(id);			
-			return ok(
-					views.html.drink.render(drink)
-					);
-		} catch(Exception e) {
-			return redirect(routes.DrinkController.drinks());  
-		}
-	}
-	
+
 	/**
 	 * 一覧画面を表示する。
 	 * @return 一覧画面
 	 */
-	public static Result drinks() {
-		return ok(
-				views.html.drinks.render(Drink.all())
-				);
+	public static Result index() {
+		return ok(index.render(myDrinkList()));
 	}
-	
+
+	/**
+	 * 詳細画面を表示する。
+	 * @return 詳細画面
+	 */
+	public static Result show(Long id) {
+		try {
+			Drink drink = Drink.find.ref(id);			
+			return ok(show.render(drink));
+		} catch(Exception e) {
+			return redirect(routes.DrinkController.index());  
+		}
+	}
+
 	/**
 	 * 入力画面を表示する。
 	 * @return 入力画面
 	 */
-	public static Result drinkInput() {
-		return ok(
-				views.html.drinkInput.render(drinkForm, createUserList())
-				);
+	public static Result add() {
+		return ok(add.render(drinkForm, createUserList()));
 	}
 	
 	/**
 	 * 登録処理
 	 * @return 一覧画面
 	 */
-	public static Result newDrink() {
+	public static Result create() {
 		Form<Drink> filledForm = drinkForm.bindFromRequest();
 
 		// エラーがある場合
 		if(filledForm.hasErrors()) {
-			return badRequest(
-					views.html.drinkInput.render(filledForm, createUserList())
-					);
+			return badRequest(add.render(filledForm, createUserList()));
 		} else {
 			Drink drink = filledForm.get();
-			for (int i = 0; i < drink.dates.size(); i++) {
-				drink.dates.get(i).delete();
-			}
-					
-			String[] users = request().body().asFormUrlEncoded().get("tmpUser");
-			for (int i = 0; i < users.length; i++) {
-				DrinkUser user = new DrinkUser();
-				user.name = users[i];
-				drink.users.add(user);
+			
+			// TODO 仮
+			String[] members = request().body().asFormUrlEncoded().get("tmpUser");
+			for (int i = 0; i < members.length; i++) {
+				DrinkMember member = new DrinkMember();
+				member.userId = members[i];
+				drink.members.add(member);
 			}
 
-			drink.organizer = "kumanomi";
+			drink.organizer = session("userId");
 			drink.updateAt = new Date();
 			Drink.create(drink);
-			return redirect(routes.DrinkController.drinks());  
+			return redirect(routes.DrinkController.index());  
 		}
 	}
 	
@@ -86,11 +79,31 @@ public class DrinkController extends Controller {
 	 * @param id
 	 * @return 一覧画面
 	 */
-	public static Result deleteDrink(Long id) {
+	public static Result delete(Long id) {
 		Drink.delete(id);
-		return redirect(routes.DrinkController.drinks());
+		return redirect(routes.DrinkController.index());
 	}
 	
+	/**
+	 * 自分が含まれている飲み会の一覧を取得
+	 * @return　飲み会一覧
+	 */
+	private static List<Drink> myDrinkList() {
+		String userId = session("userId");
+		List<Drink> result = new ArrayList<Drink>();
+		List<Drink> drinks = Drink.all();
+		for (Drink drink : drinks) {
+			for(DrinkMember member : drink.members) {
+				System.out.println(member.userId);
+				if (member.userId.equals(userId)) {
+					System.out.println(member.userId);
+					result.add(drink);
+					break;
+				}
+			}
+		}
+		return result;
+	}
 	
 	/**
 	 * （仮）ユーザーリスト作成

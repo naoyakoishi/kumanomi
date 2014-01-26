@@ -24,8 +24,6 @@ public class Drink extends Model {
 	@Required
 	public String title;
 	
-	public String description;
-	
 	public String organizer;
 	
 	public Date updateAt;
@@ -36,11 +34,11 @@ public class Drink extends Model {
 
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="drink")
-	public List<DrinkPlace> places;
+	public DrinkPlace places;
 	
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="drink")
-	public List<DrinkUser> users;
+	public List<DrinkMember> members;
 	
 	public List<String> tmpUsers;
   

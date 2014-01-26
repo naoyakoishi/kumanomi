@@ -5,7 +5,7 @@
 @main("Drink list") {
     
     <h1>Drink Schedule List</h1>
-    <div><a href="/drinks/new/">New Drink Schedule</a></div>
+    <div><a href="/drinks/add/">New Drink Schedule</a></div>
     
     <table border="1">
     	<tr>
@@ -16,13 +16,15 @@
     	</tr>
         @for(drink <- drinks) {
             <tr>
-                <td><a href="/drink/@drink.id/">@drink.title</a></td>
+                <td><a href="/drinks/@drink.id/">@drink.title</a></td>
                 <td>@drink.organizer</td>
                 <td>@drink.updateAt.format("yyyy-MM-dd hh:mm")</td>
                 <td>
-	                @form(routes.DrinkController.deleteDrink(drink.id)) {
-	                    <input type="submit" value="Delete">
-	                }
+                	@if(session.get("userId").equals(drink.organizer)) {
+		                @form(routes.DrinkController.delete(drink.id)) {
+		                    <input type="submit" value="Delete">
+		                }
+		            }
                 </td>
             </tr>
         }

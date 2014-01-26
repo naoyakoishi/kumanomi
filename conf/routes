@@ -8,11 +8,11 @@ POST    /                        controllers.Application.login()
 POST    /:id/delete              controllers.Application.delete(id: Long)
 
 # Drinks
-GET     /drink/:id/              controllers.DrinkController.drink(id: Long)          
-GET     /drinks/                 controllers.DrinkController.drinks()
-GET     /drinks/new/             controllers.DrinkController.drinkInput()
-POST    /drinks/new/             controllers.DrinkController.newDrink()
-POST    /drinks/:id/delete/      controllers.DrinkController.deleteDrink(id: Long)
+GET     /drinks/                 controllers.DrinkController.index()
+GET     /drinks/add/             controllers.DrinkController.add()
+GET     /drinks/:id/             controllers.DrinkController.show(id: Long)
+POST    /drinks/create/          controllers.DrinkController.create()
+POST    /drinks/:id/delete/      controllers.DrinkController.delete(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

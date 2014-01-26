@@ -1,0 +1,36 @@
+@(drink: Drink)
+
+@import helper._
+
+@main("Drink Schedule") {
+    
+    <h1>@drink.title</h1>
+
+	<div>information</div>
+    <table border="1">
+	<tr>
+		<td>幹事</td>
+		<td>@drink.organizer</td>
+	</tr>
+	<tr>
+		<td>最終更新日</td>
+		<td>@drink.updateAt.format("yyyy/MM/dd hh:mm:ss")</td>
+	</tr>
+	</table>
+
+	<div>time</div>
+	<table border="1">
+		<tr>
+		@for(date <- drink.dates) {
+			<td>@date.date.format("yyyy/MM/dd")</td>
+		}
+		</tr>
+		@for(member <- drink.members) {
+		<tr>
+			<td>@member.userId</td>
+		</tr>
+	}
+	</table>
+	
+	<a href="@routes.DrinkController.index()">drinks</a>
+}

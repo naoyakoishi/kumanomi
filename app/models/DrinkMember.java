@@ -1,7 +1,5 @@
 package models;
 
-import play.data.validation.Constraints.Pattern;
-import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 import javax.persistence.Id;
@@ -10,19 +8,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class DrinkPlace extends Model {
+public class DrinkMember extends Model {
 	
 	/** serialVersionUID */
-	private static final long serialVersionUID = -744407330560387957L;
+	private static final long serialVersionUID = -5307248167610902268L;
 
 	@Id  
 	public Long id;
-	
-	public String shopName;
-	
-	public String shopUrl;
 
-	public String station;
+	public String userId;
+	
+	public String name;
 
 	@ManyToOne
 	@JoinColumn(name = "drink_id")

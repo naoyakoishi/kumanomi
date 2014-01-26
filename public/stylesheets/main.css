@@ -58,3 +58,6 @@ dd#shopList dl {
 div.shopInfo > dl > dt {
 	width: 80px;
 }
+div.shopInfo {
+	margin-top: 5px;
+}

@@ -12,6 +12,9 @@
     	<script src="@routes.Assets.at("javascripts/jquery-ui-1.10.3.custom.min.js")" type="text/javascript"></script>
     </head>
     <body>
+    	@if( session.get("userId") != null && session.get("userId") != "" ) {
+    		ようこそ　@session.get("userId")　さん 
+		}
         @content
     </body>
 </html>

@@ -3,12 +3,11 @@
 @import helper._
 
 @main("New Drink") {
-  @form(routes.DrinkController.newDrink()) {
+  @form(routes.DrinkController.create()) {
     <div class="contentBody">
       <div class="contentTitle">飲み会の設定</div>
       <div class="content">
         @inputText(drinkForm("title"), '_class -> "clm", '_label -> "飲み会") 
-        @textarea(drinkForm("description"), '_label -> "説明")
         
         <div id="date">
           <dl>
@@ -20,27 +19,12 @@
             </dd>
           </dl>
         </div>
-        
-        <div id="shop">
-          <dl>
-            <dt>店  <a href="" id="addShop">追加</a></dt>
-            <dd id="shopList">
-              <div class="shopInfo">
-                @repeat(field = drinkForm("places"), min = 1) { shopForm =>
-                  @inputText(field = shopForm("shopName"), '_class -> "clm", '_label -> "店名")
-                  @inputText(field = shopForm("shopUrl"), '_class -> "clm", '_label -> "店URL")
-                  @inputText(field = shopForm("station"), '_class -> "clm", '_label -> "最寄り駅")
-                }
-              </div>
-            </dd>
-          </dl>
-        </div>
-          
+         
         <div class="delimiter">
           <dl>
             <dt>memger</dt>
             <dd>
-              <select multiple name="tmpUser">    
+              <select multiple name="tmpUser">
                 @for(user <- users) {
                   <option value='@user'>@user</option>
                 }
@@ -54,7 +38,7 @@
   }
 }
 
-<a href="@routes.DrinkController.drinks()">drinks</a>
+<a href="@routes.DrinkController.index()">drinks</a>
 
 <script>
 $(function() {
@@ -131,38 +115,10 @@ var resetDateNumber = function() {
   });
 }
 
-var shopNameCount = function() {
-  return $("dd#shopList .shopInfo").length;
-}
-
-var shopNum = shopNameCount();
-var shopCount = function() {
-  shopNum++;
-  return shopNum;
-}
-
-var addShopField = function() {
-  var $tmpShop = $("#tmpShop").clone();
-  $tmpShop.attr("class", "shopInfo");
-  var $tmpShopName = $tmpShop.find("input#places_number__shopName");
-  $tmpShopName.attr("name", $tmpShopName.attr("name").replace("number", shopCount()));
-  var $tmpShopUrl = $tmpShop.find("input#places_number__shopUrl");
-  $tmpShopUrl.attr("name", $tmpShopUrl.attr("name").replace("number", shopCount()));
-  var $tmpStation = $tmpShop.find("input#places_number__station");
-  $tmpStation.attr("name", $tmpStation.attr("name").replace("number", shopCount()));
-  $("dd#shopList").append($tmpShop);
-  return false;
-}
 </script>
 
 <div class="hide">
   <div id="tmpDate">
     @inputText(drinkForm("dates[number].date"), '_label -> "")
-  </div>
-  
-  <div id="tmpShop">
-    @inputText(drinkForm("places[number].shopName"), '_class -> "clm", '_label -> "店名")
-    @inputText(drinkForm("places[number].shopUrl"), '_class -> "clm", '_label -> "店URL")
-    @inputText(drinkForm("places[number].station"), '_class -> "clm", '_label -> "最寄り駅")
   </div>
 </div>

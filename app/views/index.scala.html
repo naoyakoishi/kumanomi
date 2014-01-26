@@ -11,7 +11,6 @@
 		<tr>
 	    	<td>@user.oauthType</td>
 	    	<td>@user.openId</td>
-	    	<td>@user.openId</td>
 	    	<td>
 	    	@form(routes.Application.delete(user.id)) {
 	    		<input type="submit" value="Delete">
@@ -22,10 +21,11 @@
 	</table>
 	
 	@form(routes.Application.login()) {
+		@inputText(userForm("userId")) 
 		@inputText(userForm("oauthType")) 
 		@inputText(userForm("openId")) 
 		<input type="submit" value="Create">
 	}
 	
-	<a href="@routes.DrinkController.drinks()">drinks</a>
+	<a href="@routes.DrinkController.index()">drinks</a>
 }

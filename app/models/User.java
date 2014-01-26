@@ -17,6 +17,9 @@ public class User extends Model {
 	public Long id;
 
 	@Required
+	public String userId;
+	
+	@Required
 	public String oauthType;
 
 	@Required
