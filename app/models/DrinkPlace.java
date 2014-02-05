@@ -1,13 +1,11 @@
 package models;
 
-import play.data.validation.Constraints.Pattern;
-import play.data.validation.Constraints.Required;
-import play.db.ebean.Model;
+import java.util.List;
 
-import javax.persistence.Id;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
+
+import play.db.ebean.Model;
 
 @Entity
 public class DrinkPlace extends Model {
@@ -16,15 +14,28 @@ public class DrinkPlace extends Model {
 	private static final long serialVersionUID = -744407330560387957L;
 
 	@Id  
-	public Long id;
+	public Long seq;
 	
-	public String shopName;
+	public String shop_name;
 	
-	public String shopUrl;
+	public String shop_url;
 
 	public String station;
+	
+	public static Finder<Long, DrinkPlace> find = new Finder<Long, DrinkPlace>(
+			Long.class, DrinkPlace.class
+			);
 
-	@ManyToOne
-	@JoinColumn(name = "drink_id")
-	public Drink drink;
+	public static List<DrinkPlace> all() {
+		return find.all();
+	}
+  
+	public static void create(DrinkPlace place) {
+		place.save();
+	}
+  
+	public static void delete(Long id) {
+		find.ref(id).delete();
+	}
+
 }

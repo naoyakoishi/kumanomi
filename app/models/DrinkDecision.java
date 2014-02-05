@@ -10,32 +10,36 @@ import javax.persistence.ManyToOne;
 import play.db.ebean.Model;
 
 @Entity
-public class DrinkMember extends Model {
+public class DrinkDecision extends Model {
 	
 	/** serialVersionUID */
-	private static final long serialVersionUID = -5307248167610902268L;
+	private static final long serialVersionUID = 2958338137069443507L;
 
 	@Id  
 	public Long seq;
 
+	public String user_id;
+	
+	public String name;
+
 	@ManyToOne
-	@JoinColumn(name = "drink_seq")
-	public Drink drink;
+	@JoinColumn(name = "drink_date_seq")
+	public DrinkDate date;
 
 	@ManyToOne
 	@JoinColumn(name = "user_seq")
 	public User user;
-	
-	public static Finder<Long, DrinkMember> find = new Finder<Long, DrinkMember>(
-			Long.class, DrinkMember.class
+
+	public static Finder<Long, DrinkDecision> find = new Finder<Long, DrinkDecision>(
+			Long.class, DrinkDecision.class
 			);
 
-	public static List<DrinkMember> all() {
+	public static List<DrinkDecision> all() {
 		return find.all();
 	}
   
-	public static void create(DrinkMember member) {
-		member.save();
+	public static void create(DrinkDecision decision) {
+		decision.save();
 	}
   
 	public static void delete(Long id) {

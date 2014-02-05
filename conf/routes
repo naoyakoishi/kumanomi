@@ -4,7 +4,7 @@
 
 # Home page
 GET     /                        controllers.Application.index()
-POST    /                        controllers.Application.login()
+
 POST    /:id/delete              controllers.Application.delete(id: Long)
 
 # Drinks

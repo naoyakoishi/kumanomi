@@ -16,12 +16,12 @@
     	</tr>
         @for(drink <- drinks) {
             <tr>
-                <td><a href="/drinks/@drink.id/">@drink.title</a></td>
+                <td><a href="/drinks/@drink.seq/">@drink.title</a></td>
                 <td>@drink.organizer</td>
-                <td>@drink.updateAt.format("yyyy-MM-dd hh:mm")</td>
+                <td>@drink.update_at.format("yyyy-MM-dd hh:mm")</td>
                 <td>
                 	@if(session.get("userId").equals(drink.organizer)) {
-		                @form(routes.DrinkController.delete(drink.id)) {
+		                @form(routes.DrinkController.delete(drink.seq)) {
 		                    <input type="submit" value="Delete">
 		                }
 		            }

@@ -1,4 +1,4 @@
-@(drinkForm: Form[Drink], users: List[String])
+@(drinkForm: Form[Drink], friendMap: Map[String, String])
 
 @import helper._
 
@@ -24,11 +24,13 @@
           <dl>
             <dt>memger</dt>
             <dd>
-              <select multiple name="tmpUser">
-                @for(user <- users) {
-                  <option value='@user'>@user</option>
-                }
-              </select>
+				@select(
+				    drinkForm("joinMembers[]"), 
+				    options = options(friendMap),
+				    '_label -> "member",
+				    'size -> 5,
+				    'multiple -> true
+				)
             </dd>
           </dl>
         </div>
