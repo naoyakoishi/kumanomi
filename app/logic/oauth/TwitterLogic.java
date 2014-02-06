@@ -3,7 +3,7 @@ package logic.oauth;
 import java.util.HashMap;
 import java.util.Map;
 
-public class twitterLogic {
+public class TwitterLogic {
 
 	/**
 	 * TODO mock

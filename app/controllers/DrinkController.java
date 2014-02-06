@@ -7,9 +7,10 @@ import java.util.List;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.data.Form;
-import logic.oauth.twitterLogic;
+import logic.oauth.TwitterLogic;
 import models.Drink;
 import models.DrinkMember;
+import models.User;
 import views.html.drink.*;
 
 public class DrinkController extends Controller {
@@ -42,7 +43,7 @@ public class DrinkController extends Controller {
 	 * @return 入力画面
 	 */
 	public static Result add() {
-		return ok(add.render(drinkForm, twitterLogic.getFriendMap()));
+		return ok(add.render(drinkForm, TwitterLogic.getFriendMap()));
 	}
 
 	/**
@@ -54,19 +55,20 @@ public class DrinkController extends Controller {
 
 		// エラーがある場合
 		if(filledForm.hasErrors()) {
-			return badRequest(add.render(filledForm, twitterLogic.getFriendMap()));
+			return badRequest(add.render(filledForm, TwitterLogic.getFriendMap()));
 		} else {
 			Drink drink = filledForm.get();
-			
-			// TODO 仮
+			drink.organizer = session("userId");
+			drink.update_at = new Date();
+
 			for (String userId : drink.joinMembers) {
 				DrinkMember member = new DrinkMember();
-
+				User user = User.confirmUser(userId, TwitterLogic.getFriendMap());
+				member.user = user;
+				member.drink = drink;
 				drink.members.add(member);
 			}
 
-			drink.organizer = session("userId");
-			drink.update_at = new Date();
 			Drink.create(drink);
 			return redirect(routes.DrinkController.index());  
 		}
